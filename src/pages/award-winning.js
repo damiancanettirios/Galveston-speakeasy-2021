@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+// import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Button from "react-bootstrap/Button"
 
@@ -11,7 +11,7 @@ import SEO from "../components/seo"
 const HousePage = ({ data }) => {
   const hero = data.contentfulPageContent.hero
   const title = data.contentfulPageContent.title
-  const body = data.contentfulPageContent.body
+  // const body = data.contentfulPages.body
   return (
     <Layout>
       <SEO
@@ -29,7 +29,7 @@ const HousePage = ({ data }) => {
         ]}
       />
       <HeroJumbotron hero={hero} title={title} />
-      <div
+      {/* <div
         style={{
           maxWidth: `960px`,
           margin: `0 auto`,
@@ -39,7 +39,7 @@ const HousePage = ({ data }) => {
         }}
       >
         <MDXRenderer>{body.childMdx.body}</MDXRenderer>
-      </div>
+      </div> */}
       <div
         style={{
           display: `flex`,
@@ -74,11 +74,6 @@ export const HouseQuery = graphql`
         fluid(quality: 99) {
           src
           ...GatsbyContentfulFluid_noBase64
-        }
-      }
-      body: longtext1 {
-        childMdx {
-          body
         }
       }
     }
