@@ -64,7 +64,7 @@ export default HousePage
 
 export const HouseQuery = graphql`
   {
-    contentfulPageContent {
+    contentfulPageContent(slug: { eq: "house" }) {
       id
       slug
       title

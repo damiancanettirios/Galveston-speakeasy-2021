@@ -22,7 +22,7 @@ if (!spaceId || !accessToken) {
 
 module.exports = {
   siteMetadata: {
-    title: `Galveston Speakeasy Cottage | Historical Home | Galveston Texas`,
+    title: `Galveston Speakeasy Cottage | Historical Vacation Rental | Galveston Texas`,
     description: `Stay at this historical home during your next visit to Galveston Texas`,
     headline: `Galveston Speakeasy Cottage`,
     address: `1212 19th St, Galveston, TX`,

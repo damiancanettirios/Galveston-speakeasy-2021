@@ -166,7 +166,7 @@ export const HomeQuery = graphql`
       }
     }
     galvestonAward: contentfulAsset(
-      title: { eq: "Galveston Historical Society" }
+      title: { eq: "Galveston Historical Foundation" }
     ) {
       id
       title

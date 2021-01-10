@@ -8,10 +8,10 @@ import HeroJumbotron from "../components/hero-jumbotron"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const HousePage = ({ data }) => {
-  const hero = data.contentfulPageContent.hero
-  const title = data.contentfulPageContent.title
-  // const body = data.contentfulPages.body
+const AwardPage = ({ data }) => {
+  const title = data.page.title
+  const hero = data.page.hero
+  const headline = data.page.headline
   return (
     <Layout>
       <SEO
@@ -28,7 +28,7 @@ const HousePage = ({ data }) => {
           `galveston speakeasy cottage`
         ]}
       />
-      <HeroJumbotron hero={hero} title={title} />
+      <HeroJumbotron hero={hero} headline={headline} />
       {/* <div
         style={{
           maxWidth: `960px`,
@@ -60,14 +60,37 @@ const HousePage = ({ data }) => {
   )
 }
 
-export default HousePage
+export default AwardPage
 
-export const HouseQuery = graphql`
+export const AwardQuery = graphql`
   {
-    contentfulPageContent {
+    # housefeatures: allContentfulHouseFeaturePost {
+    #   id
+    #   image: heroImage {
+    #     fluid {
+    #       ...GatsbyContentfulFluid_noBase64
+    #     }
+    #     description
+    #   }
+    #   title: houseFeatureName
+    #   shortDescription
+    #   slug
+    # }
+    galvestonAward: contentfulAsset(
+      title: { eq: "Galveston Historical Foundation" }
+    ) {
+      id
+      title
+      description
+      fluid(quality: 99) {
+        ...GatsbyContentfulFluid_noBase64
+      }
+    }
+    page: contentfulPageContent(slug: { eq: "award-winning" }) {
       id
       slug
       title
+      headline
       hero: backgroundimage1 {
         id
         description

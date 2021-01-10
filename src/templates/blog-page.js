@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+// import Img from "gatsby-image"
+// import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Button from "react-bootstrap/Button"
 
@@ -9,10 +9,9 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const BlogPage = ({ data }) => {
-  const hero = data.contentfulPages.hero
-  const title = data.contentfulPages.title
-  const headline = data.contentfulPages.headline
-  const body = data.contentfulPages.body
+  // const hero = data.contentfulPages.hero
+  const title = data.contentfulHouseFeaturePost.title
+  // const body = data.contentfulPages.body
   return (
     <Layout>
       <SEO
@@ -29,10 +28,10 @@ const BlogPage = ({ data }) => {
           `galveston speakeasy cottage`
         ]}
       />
-      <h1>{headline}</h1>
-      <h3></h3>
-      <Img fluid={hero.fluid} alt={hero.description} />
-      <div
+      <h1>{title}</h1>
+      {/* <h3></h3>
+      <Img fluid={hero.fluid} alt={hero.description} /> */}
+      {/* <div
         style={{
           maxWidth: `960px`,
           margin: `0 auto`,
@@ -42,7 +41,7 @@ const BlogPage = ({ data }) => {
         }}
       >
         <MDXRenderer>{body.childMdx.body}</MDXRenderer>
-      </div>
+      </div> */}
       <div
         style={{
           display: `flex`,
@@ -75,10 +74,10 @@ export const ContentQuery = graphql`
         }
         description
       }
-      houseFeatureName
+      title: houseFeatureName
       shortDescription
       slug
-      longDescription {
+      body: longDescription {
         childMdx {
           body
         }
