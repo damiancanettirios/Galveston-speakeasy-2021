@@ -1,18 +1,18 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+// import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Button from "react-bootstrap/Button"
 
-import HeroJumbotron from "../components/hero-jumbotron"
+// import HeroJumbotron from "../components/hero-jumbotron"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const ContentPage = ({ data }) => {
-  const hero = data.contentfulPages.hero
-  const title = data.contentfulPages.title
-  const headline = data.contentfulPages.headline
-  const body = data.contentfulPages.body
+  // const hero = data.contentfulHouseFeaturePost.hero
+  const title = data.contentfulHouseFeaturePost.title
+  // const headline = data.contentfulHouseFeaturePost.headline
+  // const body = data.contentfulHouseFeaturePost.body
   return (
     <Layout>
       <SEO
@@ -29,8 +29,8 @@ const ContentPage = ({ data }) => {
           `galveston speakeasy cottage`
         ]}
       />
-      <HeroJumbotron hero={hero} title={headline.headline} />
-      <div
+      {/* <HeroJumbotron hero={hero} title={headline.headline} /> */}
+      {/* <div
         style={{
           maxWidth: `960px`,
           margin: `0 auto`,
@@ -40,7 +40,7 @@ const ContentPage = ({ data }) => {
         }}
       >
         <MDXRenderer>{body.childMdx.body}</MDXRenderer>
-      </div>
+      </div> */}
       <div
         style={{
           display: `flex`,
@@ -65,21 +65,28 @@ export default ContentPage
 
 export const ContentQuery = graphql`
   query PageQuery($slug: String!) {
-    contentfulPages(slug: { eq: $slug }) {
-      title
-      slug
-      hero {
+    contentfulHouseFeaturePost(slug: { eq: $slug }) {
+      id
+      hero: heroImage {
         fluid {
           ...GatsbyContentfulFluid_noBase64
         }
+        description
       }
-      headline {
-        headline
-      }
-      body {
+      title: houseFeatureName
+      shortDescription
+      slug
+      body: longDescription {
         childMdx {
           body
         }
+      }
+      allImages: allPictures {
+        fluid {
+          ...GatsbyContentfulFluid_noBase64
+        }
+        description
+        id
       }
     }
   }

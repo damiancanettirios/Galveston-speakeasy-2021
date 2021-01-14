@@ -24,6 +24,8 @@ const IndexPage = ({ data }) => {
   const testimonials = data.testimonials.nodes
   const gallery = data.gallery.images
   const articles = data.articles.nodes
+  const galvestonPhoto = data.galvestonPhoto
+  const awardPhoto = data.awardPhoto
   return (
     <Layout>
       <SEO
@@ -48,7 +50,7 @@ const IndexPage = ({ data }) => {
         ))}
       </Carousel>
       <Airbnb superhost={superhost} />
-      <AwardWinning award={award} />
+      <AwardWinning award={award} awardPhoto={awardPhoto} />
       <HouseGallery gallery={gallery} />
       <HouseStats stats={stats} />
       {/* Testimonials */}
@@ -116,7 +118,7 @@ const IndexPage = ({ data }) => {
       </div>
       {/* Local Amenities */}
       <div style={{ padding: 0, margin: `0 auto` }}>
-        <Galveston>
+        <Galveston galvestonPhoto={galvestonPhoto}>
           <Container style={{ textAlign: `center` }}>
             <h2 style={{ color: `white`, marginBottom: 30 }}>
               Check out these places on your next trip to Galveston island
@@ -161,6 +163,18 @@ export const HomeQuery = graphql`
       id
       title
       description
+      fluid(quality: 99) {
+        ...GatsbyContentfulFluid_noBase64
+      }
+    }
+    galvestonPhoto: contentfulAsset(title: { eq: "GalvestonLocalAmenities" }) {
+      title
+      fluid(quality: 99) {
+        ...GatsbyContentfulFluid_noBase64
+      }
+    }
+    awardPhoto: contentfulAsset(title: { eq: "QueenBedRoom" }) {
+      title
       fluid(quality: 99) {
         ...GatsbyContentfulFluid_noBase64
       }

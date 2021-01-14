@@ -3,12 +3,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const result = await graphql(`
     {
-      pages: allContentfulPages {
-        nodes {
-          slug
-        }
-      }
-      blogpages: allContentfulHouseFeaturePost {
+      pages: allContentfulHouseFeaturePost {
         nodes {
           slug
         }
@@ -27,7 +22,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   pages.forEach(node => {
     createPage({
-      path: `/${node.slug}/`,
+      path: `/blog/${node.slug}/`,
       component: pagesTemplate,
       context: {
         slug: node.slug
@@ -35,16 +30,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 
-  const blogpages = result.data.blogpages.nodes
-  const blogpagesTemplate = require.resolve(`./src/templates/blog-page.js`)
+  // const blogpages = result.data.blogpages.nodes
+  // const blogpagesTemplate = require.resolve(`./src/templates/blog-page.js`)
 
-  blogpages.forEach(node => {
-    createPage({
-      path: `blog/${node.slug}/`,
-      component: blogpagesTemplate,
-      context: {
-        slug: node.slug
-      }
-    })
-  })
+  // blogpages.forEach(node => {
+  //   createPage({
+  //     path: `blog/${node.slug}/`,
+  //     component: blogpagesTemplate,
+  //     context: {
+  //       slug: node.slug
+  //     }
+  //   })
+  // })
 }

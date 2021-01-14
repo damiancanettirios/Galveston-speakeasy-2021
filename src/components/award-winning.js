@@ -49,8 +49,8 @@ const ImageDiv = styled("div")`
   }
 `
 
-const AwardWinning = ({ award }) => (
-  <Award>
+const AwardWinning = ({ award, awardPhoto }) => (
+  <Award awardPhoto={awardPhoto}>
     <AwardSection>
       <AwardText>
         <h2 style={{ marginBottom: 30, padding: `10px` }}>
