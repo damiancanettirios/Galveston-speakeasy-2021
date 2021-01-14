@@ -29,17 +29,4 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     })
   })
-
-  // const blogpages = result.data.blogpages.nodes
-  // const blogpagesTemplate = require.resolve(`./src/templates/blog-page.js`)
-
-  // blogpages.forEach(node => {
-  //   createPage({
-  //     path: `blog/${node.slug}/`,
-  //     component: blogpagesTemplate,
-  //     context: {
-  //       slug: node.slug
-  //     }
-  //   })
-  // })
 }
