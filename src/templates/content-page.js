@@ -32,11 +32,12 @@ const ContentPage = ({ data }) => {
       />
       <div
         style={{
-          maxWidth: `960px`,
+          maxWidth: `700px`,
           margin: `0 auto`,
           marginLeft: 5,
           marginRight: 5,
-          marginBottom: 40
+          marginBottom: 40,
+          paddingTop: 50
         }}
       >
         <h1>{title}</h1>
