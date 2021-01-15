@@ -1,8 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "@emotion/styled"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Button from "react-bootstrap/Button"
+import Container from "react-bootstrap/Container"
 
 import HeroJumbotron from "../components/hero-jumbotron"
 import Feature from "../components/house-feature"
@@ -23,6 +25,7 @@ const AwardPage = ({ data }) => {
   const title = data.page.title
   const hero = data.page.hero
   const headline = data.page.headline
+  const body = data.page.longtext1.childMdx.body
   const features = useHouseFeatures()
   return (
     <Layout>
@@ -41,7 +44,10 @@ const AwardPage = ({ data }) => {
         ]}
       />
       <HeroJumbotron hero={hero} title={title} />
-      <h1>{headline}</h1>
+      <Container>
+        <h2>{headline}</h2>
+        <MDXRenderer>{body}</MDXRenderer>
+      </Container>
       <HouseFeatureDiv>
         {features.map(feature => (
           <Feature key={feature.id} feature={feature} />
@@ -97,6 +103,11 @@ export const AwardQuery = graphql`
       slug
       title
       headline
+      longtext1 {
+        childMdx {
+          body
+        }
+      }
       hero: backgroundimage1 {
         id
         description

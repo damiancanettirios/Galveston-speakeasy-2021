@@ -3,12 +3,14 @@ import { graphql, useStaticQuery } from "gatsby"
 const useHouseFeatures = () => {
   const data = useStaticQuery(graphql`
     query {
-      houseFeatures: allContentfulHouseFeaturePost {
+      houseFeatures: allContentfulBlog(
+        filter: { postType: { eq: "House Feature" } }
+      ) {
         nodes {
           id
           slug
           shortDescription
-          houseFeatureName
+          postName
           longDescription {
             childMdx {
               body
@@ -36,7 +38,7 @@ const useHouseFeatures = () => {
   return data.houseFeatures.nodes.map(houseFeature => ({
     id: houseFeature.id,
     slug: houseFeature.slug,
-    title: houseFeature.houseFeatureName,
+    title: houseFeature.postName,
     headline: houseFeature.shortDescription,
     hero: houseFeature.heroImage,
     body: houseFeature.longDescription.childMdx.body,

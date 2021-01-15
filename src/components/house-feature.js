@@ -14,7 +14,7 @@ const Feature = ({ feature }) => (
     />
     <Card.Body>
       <Card.Title>
-        <Link to={feature.slug}>{feature.title}</Link>
+        <Link to={`/blog/${feature.slug}`}>{feature.title}</Link>
       </Card.Title>
       <Card.Text style={{ marginTop: 10 }}>
         {feature.shortDescription}

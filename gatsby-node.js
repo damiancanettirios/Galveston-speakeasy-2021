@@ -3,7 +3,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const result = await graphql(`
     {
-      pages: allContentfulHouseFeaturePost {
+      pages: allContentfulBlog {
         nodes {
           slug
         }
@@ -17,13 +17,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const pages = result.data.pages.nodes
-  const pagesTemplate = require.resolve(`./src/templates/content-page.js`)
+  const posts = result.data.pages.nodes
+  const postsTemplate = require.resolve(`./src/templates/content-page.js`)
 
-  pages.forEach(node => {
+  posts.forEach(node => {
     createPage({
       path: `/blog/${node.slug}/`,
-      component: pagesTemplate,
+      component: postsTemplate,
       context: {
         slug: node.slug
       }

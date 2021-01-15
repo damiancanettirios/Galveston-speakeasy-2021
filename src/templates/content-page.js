@@ -10,7 +10,7 @@ import SEO from "../components/seo"
 
 const ContentPage = ({ data }) => {
   // const hero = data.contentfulHouseFeaturePost.hero
-  const title = data.contentfulHouseFeaturePost.title
+  const title = data.contentfulBlog.title
   // const headline = data.contentfulHouseFeaturePost.headline
   // const body = data.contentfulHouseFeaturePost.body
   return (
@@ -65,7 +65,7 @@ export default ContentPage
 
 export const ContentQuery = graphql`
   query PageQuery($slug: String!) {
-    contentfulHouseFeaturePost(slug: { eq: $slug }) {
+    contentfulBlog(slug: { eq: $slug }) {
       id
       hero: heroImage {
         fluid {
@@ -73,7 +73,7 @@ export const ContentQuery = graphql`
         }
         description
       }
-      title: houseFeatureName
+      title: postName
       shortDescription
       slug
       body: longDescription {
