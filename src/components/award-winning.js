@@ -57,7 +57,7 @@ const AwardWinning = ({ award, awardPhoto }) => (
           Learn about the projects that made the Speakeasy Cottage an
           award-winning restoration
         </h2>
-        <Link to="/gallery" style={{ border: `none` }}>
+        <Link to="/award-winning" style={{ border: `none` }}>
           <Button variant="primary" size="lg">
             Take a Look
           </Button>

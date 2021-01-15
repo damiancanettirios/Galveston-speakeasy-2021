@@ -1,28 +1,19 @@
 import React from "react"
 import { graphql } from "gatsby"
-import styled from "@emotion/styled"
 
 import Button from "react-bootstrap/Button"
 
-import HeroJumbotron from "../components/hero-jumbotron"
-import Feature from "../components/house-feature"
+// import HeroJumbotron from "../components/hero-jumbotron"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import useHouseFeatures from "../hooks/use-house-features"
 
-const HouseFeatureDiv = styled("div")`
-  display: flex;
-  padding: 40px 0px 40px 0px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-`
-
-const AwardPage = ({ data }) => {
-  const title = data.page.title
-  const hero = data.page.hero
-  const headline = data.page.headline
+const BlogPage = ({ data }) => {
+  // const hero = data.contentfulPages.hero
+  const title = data.contentfulPages.title
+  // const headline = data.contentfulPages.headline
+  // const body = data.contentfulPages.body
   const features = useHouseFeatures()
   return (
     <Layout>
@@ -40,14 +31,14 @@ const AwardPage = ({ data }) => {
           `galveston speakeasy cottage`
         ]}
       />
-      <HeroJumbotron hero={hero} title={title} />
-      <h1>{headline}</h1>
-      <HouseFeatureDiv>
-        {features.map(feature => (
-          <Feature key={feature.id} feature={feature} />
-        ))}
-      </HouseFeatureDiv>
-      {/* <div
+      <h1>Blog</h1>
+      {features.map(feature => (
+        <ul>
+          <li key={feature.id}>{feature.title}</li>
+        </ul>
+      ))}
+      {/* <HeroJumbotron hero={hero} title={headline.headline} />
+      <div
         style={{
           maxWidth: `960px`,
           margin: `0 auto`,
@@ -78,31 +69,24 @@ const AwardPage = ({ data }) => {
   )
 }
 
-export default AwardPage
+export default BlogPage
 
-export const AwardQuery = graphql`
+export const HistoryQuery = graphql`
   {
-    galvestonAward: contentfulAsset(
-      title: { eq: "Galveston Historical Foundation" }
-    ) {
-      id
+    contentfulPages(slug: { eq: "history" }) {
       title
-      description
-      fluid(quality: 99) {
-        ...GatsbyContentfulFluid_noBase64
-      }
-    }
-    page: contentfulPageContent(slug: { eq: "award-winning" }) {
-      id
       slug
-      title
-      headline
-      hero: backgroundimage1 {
-        id
-        description
-        fluid(quality: 99) {
-          src
+      hero {
+        fluid {
           ...GatsbyContentfulFluid_noBase64
+        }
+      }
+      headline {
+        headline
+      }
+      body {
+        childMdx {
+          body
         }
       }
     }

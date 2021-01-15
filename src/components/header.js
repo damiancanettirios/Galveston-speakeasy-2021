@@ -63,14 +63,14 @@ const Header = ({ siteData }) => {
       </Navbar>
       {!active ? null : (
         <Nav defaultActiveKey="/" className="flex-column">
-          <Nav.Link href={`/`} style={{ paddingLeft: 10 }}>
-            Home
-          </Nav.Link>
           <Nav.Link href={`/history`} style={{ paddingLeft: 10 }}>
             History
           </Nav.Link>
           <Nav.Link href={`/house`} style={{ paddingLeft: 10 }}>
             House
+          </Nav.Link>
+          <Nav.Link href={`/award-winning`} style={{ paddingLeft: 10 }}>
+            Award Winning
           </Nav.Link>
           <Nav.Link href={`/gallery`} style={{ paddingLeft: 10 }}>
             Photo Gallery

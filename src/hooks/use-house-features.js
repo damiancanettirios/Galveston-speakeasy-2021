@@ -7,22 +7,24 @@ const useHouseFeatures = () => {
         nodes {
           id
           slug
+          shortDescription
           houseFeatureName
-          heroImage {
-            fluid {
-              ...GatsbyContentfulFluid_noBase64
-            }
-            description
-          }
           longDescription {
             childMdx {
               body
             }
           }
-          allPictures {
-            id
+          heroImage {
             description
-            fluid {
+            fluid(quality: 99) {
+              src
+              ...GatsbyContentfulFluid_noBase64
+            }
+          }
+          allPictures {
+            description
+            id
+            fluid(quality: 99) {
               ...GatsbyContentfulFluid_noBase64
             }
           }
@@ -31,10 +33,11 @@ const useHouseFeatures = () => {
     }
   `)
 
-  return data.houseFeatures.edges.node(houseFeature => ({
+  return data.houseFeatures.nodes.map(houseFeature => ({
     id: houseFeature.id,
     slug: houseFeature.slug,
     title: houseFeature.houseFeatureName,
+    headline: houseFeature.shortDescription,
     hero: houseFeature.heroImage,
     body: houseFeature.longDescription.childMdx.body,
     gallery: houseFeature.allPictures

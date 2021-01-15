@@ -5,6 +5,8 @@ import styled from "@emotion/styled"
 
 import Button from "react-bootstrap/Button"
 
+import useGallery from "../hooks/use-gallery"
+
 const GallerySection = styled("div")`
   padding: 40px 20px 40px 20px;
   width: 95vw;
@@ -56,35 +58,38 @@ const GalleryImage = styled(Link)`
   border: none;
 `
 
-const HouseGallery = ({ gallery }) => (
-  <GallerySection>
-    <Subtitle>
-      Please see our photo gallery of the Galveston Speakeasy Cottage
-    </Subtitle>
-    <div style={{ paddingBottom: `20px` }}>
-      <GalleryGrid>
-        {gallery.map(image => (
-          <GalleryImage key={image.id} to="/gallery">
-            <ImageItem fluid={image.fluid} alt={image.description} />
-          </GalleryImage>
-        ))}
-      </GalleryGrid>
-    </div>
-    <div
-      style={{
-        display: `flex`,
-        justifyContent: `center`,
-        paddingBottom: 60,
-        paddingTop: 40
-      }}
-    >
-      <Link to="/gallery" style={{ border: `none` }}>
-        <Button variant="outline-primary" size="lg">
-          Click for More Pictures
-        </Button>
-      </Link>
-    </div>
-  </GallerySection>
-)
+const HouseGallery = () => {
+  const gallery = useGallery()
+  return (
+    <GallerySection>
+      <Subtitle>
+        Please see our photo gallery of the Galveston Speakeasy Cottage
+      </Subtitle>
+      <div style={{ paddingBottom: `20px` }}>
+        <GalleryGrid>
+          {gallery.map(image => (
+            <GalleryImage key={image.id} to="/gallery">
+              <ImageItem fluid={image.fluid} alt={image.description} />
+            </GalleryImage>
+          ))}
+        </GalleryGrid>
+      </div>
+      <div
+        style={{
+          display: `flex`,
+          justifyContent: `center`,
+          paddingBottom: 60,
+          paddingTop: 40
+        }}
+      >
+        <Link to="/gallery" style={{ border: `none` }}>
+          <Button variant="outline-primary" size="lg">
+            Click for More Pictures
+          </Button>
+        </Link>
+      </div>
+    </GallerySection>
+  )
+}
 
 export default HouseGallery

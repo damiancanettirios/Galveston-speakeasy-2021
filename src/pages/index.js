@@ -22,7 +22,6 @@ const IndexPage = ({ data }) => {
   const superhost = data.superhostTag
   const award = data.galvestonAward
   const testimonials = data.testimonials.nodes
-  const gallery = data.gallery.images
   const articles = data.articles.nodes
   const galvestonPhoto = data.galvestonPhoto
   const awardPhoto = data.awardPhoto
@@ -51,7 +50,7 @@ const IndexPage = ({ data }) => {
       </Carousel>
       <Airbnb superhost={superhost} />
       <AwardWinning award={award} awardPhoto={awardPhoto} />
-      <HouseGallery gallery={gallery} />
+      <HouseGallery />
       <HouseStats stats={stats} />
       {/* Testimonials */}
       <Container style={{ marginBottom: 30, marginTop: 60, maxWidth: 960 }}>
@@ -199,16 +198,6 @@ export const HomeQuery = graphql`
         stay(formatString: "MMMM YYYY")
         short
         stars
-      }
-    }
-    gallery: contentfulGallery(name: { eq: "Main" }) {
-      name
-      images {
-        id
-        description
-        fluid(quality: 100) {
-          ...GatsbyContentfulFluid_noBase64
-        }
       }
     }
     articles: allContentfulMedia(

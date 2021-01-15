@@ -1,5 +1,4 @@
 import React from "react"
-import { graphql } from "gatsby"
 import StackGrid from "react-stack-grid"
 import { useMediaQuery } from "react-responsive"
 
@@ -10,8 +9,10 @@ import Card from "react-bootstrap/Card"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const GalleryPage = ({ data }) => {
-  const pictures = data.pictures.images
+import useGallery from "../hooks/use-gallery"
+
+const GalleryPage = () => {
+  const gallery = useGallery()
   const isTabletOrMobileDevice = useMediaQuery({
     query: "(max-device-width: 1224px)"
   })
@@ -39,7 +40,7 @@ const GalleryPage = ({ data }) => {
         </Container>
         {!isTabletOrMobileDevice ? (
           <StackGrid columnWidth={350} duration={0} monitorImagesLoaded={true}>
-            {pictures.map(image => (
+            {gallery.map(image => (
               <Card key={image.id}>
                 <Card.Img
                   variant="top"
@@ -54,7 +55,7 @@ const GalleryPage = ({ data }) => {
           </StackGrid>
         ) : (
           <>
-            {pictures.map(image => (
+            {gallery.map(image => (
               <Card key={image.id} style={{ marginTop: 10 }}>
                 <Card.Img
                   variant="top"
@@ -74,21 +75,3 @@ const GalleryPage = ({ data }) => {
 }
 
 export default GalleryPage
-
-export const GalleryQuery = graphql`
-  query {
-    pictures: contentfulGallery(name: { eq: "Main" }) {
-      name
-      images {
-        id
-        description
-        fixed(width: 300) {
-          src
-        }
-        fluid(quality: 100) {
-          ...GatsbyContentfulFluid_noBase64
-        }
-      }
-    }
-  }
-`

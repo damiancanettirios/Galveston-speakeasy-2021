@@ -49,12 +49,7 @@ const SuperhostDiv = styled("div")`
 
 const Airbnb = ({ superhost }) => (
   <HeroSection>
-    <Headline
-      css={css`
-        border-bottom: 1px solid #dcdde1;
-        padding-bottom: 20px;
-      `}
-    >
+    <Headline>
       The Galveston Speakeasy Cottage is an award-winning, fully-restored
       historical home in the heart of Galveston's historical district now
       availabile for short-term rental on{" "}
@@ -65,7 +60,12 @@ const Airbnb = ({ superhost }) => (
         Airbnb
       </a>
     </Headline>
-    <SuperhostDiv>
+    <SuperhostDiv
+      css={css`
+        border-bottom: 1px solid #dcdde1;
+        padding-bottom: 20px;
+      `}
+    >
       <SuperhostImage
         key={superhost.id}
         href={
