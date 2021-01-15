@@ -1,18 +1,19 @@
 import React from "react"
 import { graphql } from "gatsby"
-// import { MDXRenderer } from "gatsby-plugin-mdx"
+import Img from "gatsby-image"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Button from "react-bootstrap/Button"
+import Carousel from "react-bootstrap/Carousel"
 
-// import HeroJumbotron from "../components/hero-jumbotron"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const ContentPage = ({ data }) => {
-  // const hero = data.contentfulHouseFeaturePost.hero
+  const pictures = data.contentfulBlog.allImages
   const title = data.contentfulBlog.title
-  // const headline = data.contentfulHouseFeaturePost.headline
-  // const body = data.contentfulHouseFeaturePost.body
+  const subtitle = data.contentfulBlog.shortDescription
+  const body = data.contentfulBlog.body.childMdx.body
   return (
     <Layout>
       <SEO
@@ -29,8 +30,7 @@ const ContentPage = ({ data }) => {
           `galveston speakeasy cottage`
         ]}
       />
-      {/* <HeroJumbotron hero={hero} title={headline.headline} /> */}
-      {/* <div
+      <div
         style={{
           maxWidth: `960px`,
           margin: `0 auto`,
@@ -39,8 +39,17 @@ const ContentPage = ({ data }) => {
           marginBottom: 40
         }}
       >
-        <MDXRenderer>{body.childMdx.body}</MDXRenderer>
-      </div> */}
+        <h1>{title}</h1>
+        <h3>{subtitle}</h3>
+        <Carousel style={{ margin: `0 auto`, width: `95vw` }}>
+          {pictures.map(image => (
+            <Carousel.Item key={image.id} style={{ objectFit: `contain` }}>
+              <Img fluid={image.fluid} alt={image.description} />
+            </Carousel.Item>
+          ))}
+        </Carousel>
+        <MDXRenderer>{body}</MDXRenderer>
+      </div>
       <div
         style={{
           display: `flex`,
@@ -67,12 +76,6 @@ export const ContentQuery = graphql`
   query PageQuery($slug: String!) {
     contentfulBlog(slug: { eq: $slug }) {
       id
-      hero: heroImage {
-        fluid {
-          ...GatsbyContentfulFluid_noBase64
-        }
-        description
-      }
       title: postName
       shortDescription
       slug
